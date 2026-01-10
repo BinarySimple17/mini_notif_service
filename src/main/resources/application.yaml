@@ -28,20 +28,20 @@ spring:
 
   kafka:
     bootstrap-servers: localhost:9092
+    properties:
+      security.protocol: SASL_PLAINTEXT
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule required username="user1" password="EUNc6Zv6rl";
+
     consumer:
-      group-id: notification-group
-      auto-offset-reset: earliest
-      security.protocol: SASL_PLAINTEXT
-      sasl:
-        mechanism: PLAIN
-        jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="user1" password="EUNc6Zv6rl";
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      security.protocol: SASL_PLAINTEXT
-      sasl:
-        mechanism: PLAIN
-        jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="user1" password="EUNc6Zv6rl";
+      group-id: notification-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
+      properties:
+        spring.json.use.type.headers: false
+        spring.json.value.default.type: ru.binarysimple.notification.kafka.OrderEvent
+        spring.json.trusted.packages: "*"
 
 server:
   port: 8080
@@ -79,3 +79,8 @@ management:
 info:
   app:
     name: "Notification Service"
+
+app:
+  kafka:
+    topics:
+      order-events: order.events
