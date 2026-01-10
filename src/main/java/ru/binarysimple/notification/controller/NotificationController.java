@@ -24,13 +24,15 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/notif")
 @RequiredArgsConstructor
-public class NotificationResource {
+public class NotificationController {
 
     private final NotificationRepository notificationRepository;
 
     private final NotificationMapper notificationMapper;
 
     private final ObjectMapper objectMapper;
+    
+//    private final KafkaProducer kafkaProducer;
 
     @GetMapping
     public PagedModel<NotificationDto> getAll(@ParameterObject @ModelAttribute NotificationFilter filter, @ParameterObject Pageable pageable) {
@@ -59,6 +61,10 @@ public class NotificationResource {
     public NotificationDto create(@RequestBody @Valid NotificationDto dto) {
         Notification notification = notificationMapper.toEntity(dto);
         Notification resultNotification = notificationRepository.save(notification);
+        
+        // Отправляем сообщение в Kafka
+//        kafkaProducer.sendMessage(resultNotification.getId().toString());
+        
         return notificationMapper.toNotificationDto(resultNotification);
     }
 
