@@ -7,6 +7,7 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 import ru.binarysimple.notification.dto.NotificationContactDto;
 import ru.binarysimple.notification.dto.NotificationDto;
+import ru.binarysimple.notification.kafka.OrderEvent;
 import ru.binarysimple.notification.model.Notification;
 import ru.binarysimple.notification.model.NotificationContact;
 
@@ -19,6 +20,8 @@ public interface NotificationMapper {
     NotificationContact toEntity(NotificationContactDto contactDto);
     
     NotificationContactDto toDto(NotificationContact contact);
+
+    Notification toEntity(OrderEvent event);
 
     Notification updateWithNull(NotificationDto notificationDto, @MappingTarget Notification notification);
 }
