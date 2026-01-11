@@ -10,6 +10,7 @@ import ru.binarysimple.notification.dto.NotificationDto;
 import ru.binarysimple.notification.kafka.OrderEvent;
 import ru.binarysimple.notification.mapper.NotificationMapper;
 import ru.binarysimple.notification.model.Notification;
+import ru.binarysimple.notification.model.ParentType;
 import ru.binarysimple.notification.repository.NotificationRepository;
 
 @Service
@@ -44,9 +45,9 @@ public class NotificationServiceImpl implements NotificationService {
     public NotificationDto patch(Long id, NotificationDto dto) {
         Notification notification = notificationRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Entity with id `%s` not found".formatted(id)));
-        
+
         notificationMapper.updateWithNull(dto, notification);
-        
+
         Notification resultNotification = notificationRepository.save(notification);
         return notificationMapper.toNotificationDto(resultNotification);
     }
@@ -65,13 +66,12 @@ public class NotificationServiceImpl implements NotificationService {
 
         Notification notification = notificationMapper.toEntity(event);
 
-//        Notification notification = new Notification();
-//        notification.setUsername(event.getUsername());
-//        notification.setContact(event.getContact());
-////        boolean success = "PAID".equalsIgnoreCase(event.getStatus());
-////        notification.setSubject(success ? "Order success" : "Order failed");
-//        notification.setText(event.getText());
-////        notification.setStatus(event.getStatus());
+        String message = String.format("Order %s status changed to %s", event.getOrderId(), event.getStatus());
+
+        notification.setText(message);
+
+        notification.setParentType(ParentType.ORDER);
+
         notificationRepository.save(notification);
         log.info("Notification processed for user {}", event.getUsername());
     }

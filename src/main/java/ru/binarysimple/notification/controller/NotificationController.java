@@ -24,7 +24,7 @@ public class NotificationController {
 
     private final NotificationService notificationService;
 
-    private final ObjectMapper objectMapper;
+//    private final ObjectMapper objectMapper;
 
     @GetMapping
     public PagedModel<NotificationDto> getAll(@ParameterObject @ModelAttribute NotificationFilter filter, @ParameterObject Pageable pageable) {
@@ -33,28 +33,28 @@ public class NotificationController {
         return new PagedModel<>(notificationDtoPage);
     }
 
-    @GetMapping("/{id}")
-    public NotificationDto getOne(@PathVariable Long id) {
-        return notificationService.getOne(id);
-    }
+//    @GetMapping("/{id}")
+//    public NotificationDto getOne(@PathVariable Long id) {
+//        return notificationService.getOne(id);
+//    }
 
     @PostMapping
     public NotificationDto create(@RequestBody @Valid NotificationDto dto) {
         return notificationService.create(dto);
     }
 
-    @PatchMapping("/{id}")
-    public NotificationDto patch(@PathVariable Long id, @RequestBody JsonNode patchNode) throws IOException {
-        NotificationDto notificationDto = notificationService.getOne(id);
-        objectMapper.readerForUpdating(notificationDto).readValue(patchNode);
+//    @PatchMapping("/{id}")
+//    public NotificationDto patch(@PathVariable Long id, @RequestBody JsonNode patchNode) throws IOException {
+//        NotificationDto notificationDto = notificationService.getOne(id);
+//        objectMapper.readerForUpdating(notificationDto).readValue(patchNode);
+//
+//        return notificationService.patch(id, notificationDto);
+//    }
 
-        return notificationService.patch(id, notificationDto);
-    }
 
-
-    @DeleteMapping("/{id}")
-    public NotificationDto delete(@PathVariable Long id) {
-        return notificationService.delete(id);
-    }
+//    @DeleteMapping("/{id}")
+//    public NotificationDto delete(@PathVariable Long id) {
+//        return notificationService.delete(id);
+//    }
 
 }

@@ -5,6 +5,7 @@ public enum NotificationType {
     WARNING("Warning"),
     ERROR("Error"),
     SUCCESS("Success"),
+    FAIL("Fail"),
     DEFAULT("Default");
 
     private final String typeName;
