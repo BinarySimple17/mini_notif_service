@@ -20,6 +20,13 @@ public class Notification {
     @Column(name = "notification_type", nullable = false, length = 10)
     private NotificationType notificationType;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "parent_type", length = 15)
+    private ParentType parentType;
+
+    @Column(name = "parent_id")
+    private Long parentId;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
@@ -35,6 +42,11 @@ public class Notification {
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
+
+        if (notificationType == null) {
+            notificationType = NotificationType.DEFAULT;
+        }
     }
+
 
 }
