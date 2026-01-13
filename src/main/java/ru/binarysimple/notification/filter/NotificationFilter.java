@@ -4,16 +4,19 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 import ru.binarysimple.notification.model.Notification;
 import ru.binarysimple.notification.model.NotificationType;
+import ru.binarysimple.notification.model.ParentType;
 
 import java.time.LocalDateTime;
 
 public record NotificationFilter(String username, LocalDateTime createdAtLte, LocalDateTime createdAtGte,
-                                 NotificationType notificationType, Long id) {
+                                 NotificationType notificationType, ParentType parentType, Long parentId, Long id) {
     public Specification<Notification> toSpecification() {
         return usernameSpec()
                 .and(createdAtLteSpec())
                 .and(createdAtGteSpec())
                 .and(notificationTypeSpec())
+                .and(notificationParentTypeSpec())
+                .and(notificationParentIdSpec())
                 .and(idSpec());
     }
 
@@ -38,6 +41,18 @@ public record NotificationFilter(String username, LocalDateTime createdAtLte, Lo
     private Specification<Notification> notificationTypeSpec() {
         return ((root, query, cb) -> notificationType != null
                 ? cb.equal(root.get("notificationType"), notificationType)
+                : null);
+    }
+
+    private Specification<Notification> notificationParentTypeSpec() {
+        return ((root, query, cb) ->  parentType != null
+                ? cb.equal(root.get("parentType"), parentType)
+                : null);
+    }
+
+    private Specification<Notification> notificationParentIdSpec() {
+        return ((root, query, cb) ->  parentId != null
+                ? cb.equal(root.get("parentId"), parentId)
                 : null);
     }
 
