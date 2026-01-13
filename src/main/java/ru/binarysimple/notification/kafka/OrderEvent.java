@@ -17,8 +17,6 @@ public class OrderEvent {
 
     private String username;
 
-    private String email;
-
     private BigDecimal totalCost;
 
     private OrderStatus status;

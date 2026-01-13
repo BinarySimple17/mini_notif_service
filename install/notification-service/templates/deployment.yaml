@@ -68,7 +68,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: jwt-secret
-                  key: secret  
+                  key: secret
+            - name: KAFKA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: kafka-secret
+                  key: client-passwords
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
