@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public enum OrderStatus {
     NEW("New"),
+    FAILED("Failed"),
     IN_PROGRESS("In progress"),
     DONE("Done"),
     CANCELED("Canceled");
