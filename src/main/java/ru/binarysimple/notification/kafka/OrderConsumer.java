@@ -15,7 +15,7 @@ public class OrderConsumer {
 
     @KafkaListener(topics = "${app.kafka.topics.order-events:order.events}", groupId = "notification-service")
     public void onOrderEvent(@Payload OrderEvent event) {
-        log.info("Received order event {}", event.getOrderId());
+        log.info("Received order event {}", event.getParentId());
         notificationService.processOrderEvent(event);
     }
 }

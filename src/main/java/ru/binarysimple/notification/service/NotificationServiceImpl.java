@@ -66,7 +66,7 @@ public class NotificationServiceImpl implements NotificationService {
 
         Notification notification = notificationMapper.toEntity(event);
 
-        String message = String.format("Order %s status changed to %s", event.getOrderId(), event.getStatus());
+        String message = String.format("Order %s status changed to %s", event.getParentId(), event.getStatus());
 
         notification.setText(message);
 

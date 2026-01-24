@@ -3,7 +3,7 @@ spring:
     name: notification
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/${DB_NAME:test_db}
+    url: jdbc:postgresql://localhost:5440/${DB_NAME:test_db}
     username: ${DB_USERNAME:test_user}
     password: ${DB_PASSWORD:test_password}
     driver-class-name: org.postgresql.Driver
@@ -24,14 +24,16 @@ spring:
 
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
+    liquibase-schema: public
+    default-schema: notif_db
     enabled: true
 
   kafka:
     bootstrap-servers: localhost:9092
-    properties:
-      security.protocol: SASL_PLAINTEXT
-      sasl.mechanism: PLAIN
-      sasl.jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule required username="user1" password="EUNc6Zv6rl";
+#    properties:
+#      security.protocol: SASL_PLAINTEXT
+#      sasl.mechanism: PLAIN
+#      sasl.jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule required username="user1" password="EUNc6Zv6rl";
 
     consumer:
       group-id: notification-service
