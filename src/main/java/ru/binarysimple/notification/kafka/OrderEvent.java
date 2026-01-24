@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 public class OrderEvent {
-    private Long orderId;
+//    private Long orderId;
 
     private String username;
 
