@@ -51,6 +51,7 @@ server:
 
 endpoints:
   api-gateway: http://localhost:8090
+  users-service: http://localhost:8100
 
 logging:
   level:
@@ -86,4 +87,4 @@ info:
 app:
   kafka:
     topics:
-      order-events: order.events
+      order-events: notification.events.order

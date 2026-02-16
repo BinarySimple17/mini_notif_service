@@ -6,6 +6,7 @@ import org.springframework.data.jpa.domain.Specification;
 import ru.binarysimple.notification.dto.NotificationDto;
 import ru.binarysimple.notification.kafka.OrderEvent;
 import ru.binarysimple.notification.model.Notification;
+import ru.binarysimple.notification.model.ParentType;
 
 public interface NotificationService {
     
@@ -20,4 +21,6 @@ public interface NotificationService {
     NotificationDto delete(Long id);
 
     void processOrderEvent(OrderEvent event);
+
+    void processEvent(OrderEvent event, ParentType parentType);
 }

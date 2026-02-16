@@ -10,8 +10,11 @@ public enum OrderStatus {
     FAILED("Failed"),
     IN_PROGRESS("In progress"),
     PAID("Paid"),
+    WAREHOUSE_RESERVED("Warehouse reserved"),
     DONE("Done"),
-    CANCELED("Canceled");
+    CANCELED("Canceled"),
+    COMPENSATED("Compensated"),
+    RESERVING_PAYMENT("Reserving payment");
 
     private final String title;
 

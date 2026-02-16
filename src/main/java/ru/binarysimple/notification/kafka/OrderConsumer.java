@@ -13,7 +13,7 @@ import ru.binarysimple.notification.service.NotificationService;
 public class OrderConsumer {
     private final NotificationService notificationService;
 
-    @KafkaListener(topics = "${app.kafka.topics.order-events:order.events}", groupId = "notification-service")
+    @KafkaListener(topics = "${app.kafka.topics.order-events:notification.events.order}", groupId = "notification-service")
     public void onOrderEvent(@Payload OrderEvent event) {
         log.info("Received order event {}", event.getParentId());
         notificationService.processOrderEvent(event);
