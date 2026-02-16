@@ -23,7 +23,7 @@ public class OrderEvent {
 
 //    private String text;
 
-    private NotificationContact contact;
+//    private NotificationContact contact;
 
     private NotificationType notificationType;
 

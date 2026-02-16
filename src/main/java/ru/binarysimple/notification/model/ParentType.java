@@ -2,6 +2,8 @@ package ru.binarysimple.notification.model;
 
 public enum ParentType {
     ORDER("Order"),
+    WAREHOUSE("Warehouse"),
+    DELIVERY("Delivery"),
     PAYMENT("Payment"),
     USER("User");
 
