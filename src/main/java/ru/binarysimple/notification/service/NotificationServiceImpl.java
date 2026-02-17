@@ -83,6 +83,7 @@ public class NotificationServiceImpl implements NotificationService {
 
         } catch (Exception e) {
             log.error("Failed to get user info for order {}: {}", event.getParentId(), e.getMessage(), e);
+            return;
         }
 
         Notification notification = notificationMapper.toEntity(event);
