@@ -42,12 +42,12 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 
       properties:
-        spring.json.use.type.headers: false
-        spring.json.value.default.type: ru.binarysimple.notification.kafka.OrderEvent
+#        spring.json.use.type.headers: false
+#        spring.json.value.default.type: ru.binarysimple.notification.kafka.OrderEvent
         spring.json.trusted.packages: "*"
 
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 endpoints:
   api-gateway: http://localhost:8090
